@@ -21,4 +21,24 @@
 **Known Limitations**
 - Backend returns fake ID
 - No error handling robustness
-- No environment config
+- No environment config<br><br><br>
+
+><ins>Date: 13th Feb 2026</ins>><br><br>
+
+**Entry: Dynamic Resource Resolution**<br><br>
+**Implemented**
+- In-memory store (Map)
+- ID generation service
+- POST /generate persists JSON
+- GET /:id/:resource resolves top-level keys<br><br>
+
+**Architectural Decisions**
+- Limited routing to top-level keys only
+- No nested traversal yet
+- No CRUD operations yet<br><br>
+
+**Known Limitations**
+- No persistence
+- No expiry
+- No mutation support
+- No rate limiting

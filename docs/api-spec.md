@@ -20,9 +20,24 @@ Create a mock API.
 - Accepts: JSON object
 - Content-Type: application/json
 
+### Validation Rules
+- Must be valid JSON object
+- Reject if not object
+- Reject if empty
+
 ### Returns
+Response (200)
 - id (string)
 - url (string)
+```
+{
+  "id": "abc123",
+  "url": "http://localhost:3000/abc123"
+}
+```
+### Errors
+- **400** → invalid JSON body
+- **500** → internal error
 
 ### Notes
 - Each top-level key becomes a REST resource
@@ -36,11 +51,13 @@ Create a mock API.
 Access generated mock data.
 
 ### Pattern
-/:id/:resource
-/:id/:resource/:itemId
+/:id/
 
 ### Returns
 - Stored JSON response
+
+### Errors
+- **404** → API not present
 
 ---
 
@@ -50,6 +67,7 @@ Delete a generated mock API.
 
 ### Returns
 - success (boolean)
+- false (if API doesn't exists already)
 
 ### Notes
 - Removes stored data immediately
