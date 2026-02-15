@@ -41,4 +41,18 @@
 - No persistence
 - No expiry
 - No mutation support
-- No rate limiting
+- No rate limiting<br><br>
+
+><ins>Date: 14th Feb 2026</ins>><br><br>
+
+**Entry: Centralised error handling introduced**<br><br>
+**Implemented**
+- Introduced centralized error handling middleware.
+- Added `AppError` abstraction to standardize custom error creation.
+- Refactored existing routes to use structured error responses.
+- Improved consistency of HTTP status codes and error messages.<br><br>
+
+**Notes**
+- Centralizing error handling reduces repetitive try/catch blocks.
+- It makes the application easier to scale and maintain.
+- `AppError` ensures predictable error structure across the API.<br><br>

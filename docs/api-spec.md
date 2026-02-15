@@ -36,6 +36,14 @@ Response (200)
 }
 ```
 ### Errors
+**Error response format**:
+```
+throw new AppError(
+    statusCode,
+    "ERROR_CODE",
+    `message to be sent as response`
+)
+```
 - **400** → invalid JSON body
 - **500** → internal error
 
