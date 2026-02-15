@@ -1,7 +1,12 @@
 const store = new Map<string, any>();
 
 function saveMock(id: string, json: any) {
-    store.set(id, json);
+    const mock = {
+        id,
+        data: json,
+        createdAt: Date.now()
+    }
+    store.set(id, mock);
 }
 
 function getMock(id: string) {

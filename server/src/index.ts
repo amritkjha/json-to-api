@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import generateRouter from './routes/generate.js';
 import mockRouter from './routes/mock.js';
+import { ErrorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.get('/health', (req, res) => {
 
 app.use('/', generateRouter);
 app.use('/', mockRouter);
+
+app.use(ErrorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`);
