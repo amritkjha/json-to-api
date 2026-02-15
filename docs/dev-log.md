@@ -56,3 +56,12 @@
 - Centralizing error handling reduces repetitive try/catch blocks.
 - It makes the application easier to scale and maintain.
 - `AppError` ensures predictable error structure across the API.<br><br>
+
+><ins>Date: 15th Feb 2026</ins>><br><br>
+
+**Entry: Validation rules tightened**<br><br>
+**Implemented**
+- Added request validation layer before controller execution.
+- Introduced payload size limit enforcement.
+- Updated API specification with validation and error standards.
+- Strengthened data model constraints.<br><br>

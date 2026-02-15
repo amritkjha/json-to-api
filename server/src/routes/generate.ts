@@ -6,13 +6,29 @@ const router = Router();
 
 router.post('/generate', (req,res) => {
     const data = req.body;  // to be stored
-    if(!data || Object.keys(data).length == 0) {
+    if(!data || typeof data !== 'object' || Array.isArray(data)) {
         // res.status(400).json({error: 'Invalid Json'});
         throw new AppError(
             400,
             "INVALID_JSON",
             "Request body must be a valid JSON."
         )
+    }
+    if(Object.keys(data).length == 0) {
+        throw new AppError(
+            400,
+            "EMPTY_JSON",
+            "JSON object cannot be empty."
+        )
+    }
+    for (const key of Object.keys(data)) {
+        if (!/^[a-zA-Z0-9_-]+$/.test(key)) {
+            throw new AppError(
+            400,
+            "INVALID_KEY_NAME",
+            `Invalid resource key '${key}'. Only alphanumeric, underscore and hyphen allowed`
+            );
+        }
     }
     const id = Math.random().toString(36).substring(2, 8);
     saveMock(id, data);

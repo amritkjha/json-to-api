@@ -24,6 +24,12 @@ Create a mock API.
 - Must be valid JSON object
 - Reject if not object
 - Reject if empty
+- Keys must be strings.
+- Nested values can be any valid JSON type unless otherwise restricted.
+
+## Payload Size Limit
+- Maximum request payload size: 100KB
+- Requests exceeding this limit will be rejected.
 
 ### Returns
 Response (200)
