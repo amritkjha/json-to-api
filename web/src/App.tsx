@@ -4,6 +4,7 @@ import { useState } from 'react'
 import './App.css'
 import JsonInput from './components/JsonInput'
 import ResultView from './components/ResultView'
+import EndpointTester from './components/EndpointTester';
 
 function App() {
   const [jsonInput, setJsonInput] = useState('');
@@ -22,11 +23,20 @@ function App() {
     // alert(`Link generated ${response.url}`);
   }
 
+  const ApiGeneratorContainerStyles = {
+    display: 'flex'
+  }
+
   return (
     <>
       <h1>JsonToAPI</h1>
-      <JsonInput jsonInput={jsonInput} setJsonInput={setJsonInput} generateLink={generateLink} />
-      <ResultView generatedLink={generatedLink} setGeneratedLink={setGeneratedLink} />
+      <div style={ApiGeneratorContainerStyles}>
+        <div>
+          <JsonInput jsonInput={jsonInput} setJsonInput={setJsonInput} generateLink={generateLink} />
+          <ResultView generatedLink={generatedLink} setGeneratedLink={setGeneratedLink} />
+        </div>
+        <EndpointTester />
+      </div>
     </>
   )
 }

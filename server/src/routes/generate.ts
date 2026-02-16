@@ -34,7 +34,7 @@ router.post('/generate', (req,res) => {
     saveMock(id, data);
     res.status(200).json({
         id,
-        urll: `localhost:3000/${id}`,
+        urll: `http://localhost:3000/${id}`,
     })
 })
 
