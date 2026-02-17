@@ -25,16 +25,41 @@ const EndpointTester = () => {
     }
     const testerContainerStyles:any = {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        width: '40%',
+        border: '1px solid #D3D3D3',
+        padding: '21px',
+        borderRadius: '12px',
+        marginLeft: '36px'
+    }
+    const labelStyles = {
+        marginRight: 'auto',
+        display: 'flex'
     }
     const inputUrlStyles = {
-        padding: '6px'
+        padding: '6px',
+        border: '1px solid #D3D3D3',
+        width: '90%',
+        borderRadius: '9px',
+        marginRight: '3px'
+    }
+    const fetchApiInputStyles = {
+        display: 'flex'
+    }
+    const jsonPlaceholderStyles = {
+        borderRadius: '9px',
+        border: '1px solid #D3D3D3'
     }
     return (
         <div style={testerContainerStyles}>
-            <input style={inputUrlStyles} type="text" value={inputUrl} onChange={(e:any)=>setInputUrl(e.target.value)} />
-            <button onClick={callApi}>Get</button>
-            <textarea rows={18} cols={36} value={JSON.stringify(jsonResponse)} />
+            <h2>Fetch Mock API</h2>
+            <label style={labelStyles}>API URL</label>
+            <div style={fetchApiInputStyles}>
+                <input style={inputUrlStyles} type="text" value={inputUrl} onChange={(e:any)=>setInputUrl(e.target.value)} />
+                <button onClick={callApi}>Fetch</button>
+            </div>
+            <label style={labelStyles}>Response</label>
+            <textarea rows={18} cols={36} value={JSON.stringify(jsonResponse)} style={jsonPlaceholderStyles} />
         </div>
     );
 }
