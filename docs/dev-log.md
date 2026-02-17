@@ -65,3 +65,16 @@
 - Introduced payload size limit enforcement.
 - Updated API specification with validation and error standards.
 - Strengthened data model constraints.<br><br>
+
+><ins>Date: 16th Feb 2026</ins>><br><br>
+
+**Entry: Endpoint Testing panel implemented**<br><br>
+**Implemented**
+- Added a lightweight testing panel in the frontend.
+- Allows users to trigger generated mock endpoints directly.
+- Displays:
+  - Response body
+  - HTTP status
+  - Error messages (if any)
+- Helps validate mock behavior without external tools (Postman/curl).
+- Improves development feedback loop.<br><br>

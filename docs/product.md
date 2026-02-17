@@ -15,3 +15,7 @@ Frontend developers
 
 **Core promise**<br>
 Paste JSON → live endpoint instantly
+
+**Capabilities**
+- Built-in endpoint tester
+- No external tools required
