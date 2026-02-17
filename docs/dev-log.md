@@ -78,3 +78,11 @@
   - Error messages (if any)
 - Helps validate mock behavior without external tools (Postman/curl).
 - Improves development feedback loop.<br><br>
+
+><ins>Date: 17th Feb 2026</ins>><br><br>
+
+**Entry: New layout introduced**<br><br>
+**Implemented**
+- Redesigned the overall layout with a two-panel split design.
+- Implemented Format JSON button for better UX (functionality left).
+- Improved spacing, padding, and overall visual consistency<br><br>
