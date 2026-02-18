@@ -8,7 +8,7 @@ import EndpointTester from './components/EndpointTester';
 
 function App() {
   const [jsonInput, setJsonInput] = useState('');
-  const [generatedLink, setGeneratedLink] = useState('www.amritkjha.com');
+  const [generatedLink, setGeneratedLink] = useState('');
   const generateLink = async() => {
     // api call
     const response:any = await fetch('http://localhost:3000/generate', {
@@ -23,6 +23,11 @@ function App() {
     // alert(`Link generated ${response.url}`);
   }
 
+  const handleFormatting = () => {
+    let newJson = JSON.stringify(JSON.parse(jsonInput), null, 2);
+    setJsonInput(newJson);
+  }
+
   const AppContainer = {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
@@ -30,9 +35,10 @@ function App() {
   }
 
   const ApiGeneratorContainerStyles = {
-    border: '1px solid #D3D3D3',
     padding: '21px',
-    borderRadius: '12px'
+    borderRadius: '12px',
+    backgroundColor: 'white',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
   }
 
   const ApiGeneratorTitleStyles = {
@@ -50,19 +56,25 @@ function App() {
     display: 'flex'
   }
 
+  const AppTitleStyles = {
+    fontSize: '45px',
+    fontWeight: 'bold',
+    margin: '0'
+  }
+
   return (
     <>
-      <h1>JsonToAPI</h1>
-      <p>Create instant mock APIs from your custom JSON data</p>
+      <p style={AppTitleStyles}>JsonToAPI</p>
+      <p style={{ marginTop: '0' }}>Create instant mock APIs from your custom JSON data</p>
       <div style={AppContainer}>
         <div style={ApiGeneratorContainerStyles}>
           <div style={ApiGeneratorTitleStyles}>
             <h2>Create Mock API</h2>
-            <p style={jsonFormatterStyles}>Format JSON</p>
+            <p style={jsonFormatterStyles} onClick={handleFormatting}>Format JSON</p>
           </div>
           <label style={labelStyles}>JSON Data</label>
           <JsonInput jsonInput={jsonInput} setJsonInput={setJsonInput} generateLink={generateLink} />
-          <ResultView generatedLink={generatedLink} setGeneratedLink={setGeneratedLink} />
+          {generatedLink&&<ResultView generatedLink={generatedLink} setGeneratedLink={setGeneratedLink} />}
         </div>
         <EndpointTester />
       </div>
