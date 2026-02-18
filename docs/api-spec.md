@@ -31,6 +31,24 @@ Create a mock API.
 - Maximum request payload size: 100KB
 - Requests exceeding this limit will be rejected.
 
+## JSON Formatting Support (Client-Side)
+The input JSON textarea now includes a “Format JSON” button.
+
+**Behavior**
+- Takes current textarea content
+- Attempts to parse it as JSON
+- If valid:
+  - Reformats using JSON.stringify(obj, null, 2)
+  - Updates textarea with pretty-printed JSON
+- If invalid:
+  - Shows validation error message
+  - Does not modify textarea content
+
+**Purpose**
+- Improves readability before submission
+- Reduces malformed payload submissions
+- Helps during manual mock creation
+
 ### Returns
 Response (200)
 - id (string)

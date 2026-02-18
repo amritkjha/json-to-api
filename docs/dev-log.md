@@ -86,3 +86,12 @@
 - Redesigned the overall layout with a two-panel split design.
 - Implemented Format JSON button for better UX (functionality left).
 - Improved spacing, padding, and overall visual consistency<br><br>
+
+><ins>Date: 18th Feb 2026</ins>><br><br>
+
+**Entry: JSON Formatting and Styling finalised**<br><br>
+**Implemented**
+- Finalised CSS styling for the selected layout
+- JSON formatting button for input textarea
+- Client-side JSON parsing before submission
+- Pretty-print formatting using 2-space indentation<br><br>
