@@ -3,8 +3,8 @@ import { useState } from "react";
 const EndpointTester = () => {
     const [inputUrl, setInputUrl] = useState('');
     const [jsonResponse, setJsonResponse] = useState();
+    const [error, setError] = useState<any>();
     const callApi = async() => {
-        // logic here
         const response:any = await fetch(inputUrl, {
         method: 'GET',
         headers: {
@@ -13,6 +13,17 @@ const EndpointTester = () => {
         const data = await response.json();
         setJsonResponse(data);
         console.log('resp: ', data);
+    }
+    const handleUrlInput = (e:any) => {
+        try {
+            const url = new URL(e.target.value);
+            console.log('url: ', url);
+            if(url.hostname !== 'localhost')setError('only URLs from localhost allowed');
+            else setError('');
+        } catch (error:any) {
+            setError(error.message);
+        }
+        setInputUrl(e.target.value)
     }
     const testerContainerStyles:any = {
         display: 'flex',
@@ -43,17 +54,23 @@ const EndpointTester = () => {
         padding: '12px'
     }
     const buttonStyles = {
-        backgroundColor: '#9d00ff',
-        color: 'white'
+        backgroundColor: error ? '#A9A9A9' : '#9d00ff',
+        color: 'white',
+        cursor: error ? 'not-allowed' : 'pointer'
+    }
+    const errorMessageStyles = {
+        color: 'red',
+        fontSize: '12px'
     }
     return (
         <div style={testerContainerStyles}>
             <h2>Fetch Mock API</h2>
             <label style={labelStyles}>API URL</label>
             <div style={fetchApiInputStyles}>
-                <input style={inputUrlStyles} type="text" value={inputUrl} placeholder="Paste generated URL here" onChange={(e:any)=>setInputUrl(e.target.value)} />
+                <input style={inputUrlStyles} type="text" value={inputUrl} placeholder="Paste generated URL here" onChange={(e)=>handleUrlInput(e)} />
                 <button style={buttonStyles} onClick={callApi}>Fetch</button>
             </div>
+            {error && <p style={errorMessageStyles}>{error}</p>}
             <label style={labelStyles}>Response</label>
             <textarea rows={15} cols={50} value={JSON.stringify(jsonResponse)} placeholder="Fetched JSON will appear here..." style={jsonPlaceholderStyles} />
         </div>
