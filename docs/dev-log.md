@@ -95,3 +95,12 @@
 - JSON formatting button for input textarea
 - Client-side JSON parsing before submission
 - Pretty-print formatting using 2-space indentation<br><br>
+
+><ins>Date: 19th Feb 2026</ins>><br><br>
+
+**Entry: Validation Tightened from Frontend**<br><br>
+**Implemented**
+- Added validation for JSON input for creating mock API
+- Added validation for URL input to test endpoint
+- Separate validation messages below both fields with detailed error
+- Restricted Endpoint tester with a specific hostname<br><br>
