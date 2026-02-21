@@ -2,8 +2,8 @@
 ```
 interface StoredMock {
   id: string
-  data: Record<string, unknown>
-  createdAt: Date
+  payload: Record<string, unknown>
+  expiresAt: Date
 }
 ```
 **id**
@@ -11,12 +11,13 @@ interface StoredMock {
 - Generated at creation time
 - Used as namespace for routing
 
-**data**
+**payload**
 - Raw JSON provided by user
 - Only top-level keys are routable
 - Nested traversal not supported (yet)
+- Maximum JSON payload: 100KB (enforced at request layer)
 
-**createdAt** - (not implemented)
-- Timestamp of creation
-- Not yet used
-- Reserved for expiry logic in future phases
+**expiresAt**
+- expiresAt has MongoDB TTL index
+- Documents auto-delete after 24 hours
+- Expiry handled at DB level

@@ -104,3 +104,21 @@
 - Added validation for URL input to test endpoint
 - Separate validation messages below both fields with detailed error
 - Restricted Endpoint tester with a specific hostname<br><br>
+
+><ins>Date: 20th Feb 2026</ins>><br><br>
+
+**Entry: Public Launch Hardening**<br><br>
+**Implemented**
+- Global rate limiting (100 req / 15 min per IP)
+- Payload size limit (100KB)
+- MongoDB TTL index (24h auto-expiry)<br><br>
+
+**Architectural Decisions**
+- TTL handled at DB layer
+- No manual cleanup job
+- Rate limiting applied globally for simplicity<br><br>
+
+**Known Tradeoffs**
+- Heavy legitimate users may hit rate cap
+- Mocks are temporary
+- Free-tier DB limitations remain<br><br>

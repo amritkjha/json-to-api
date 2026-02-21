@@ -71,6 +71,23 @@ throw new AppError(
 - **400** → invalid JSON body
 - **500** → internal error
 
+### Rate Limiting
+- 100 requests per IP per 15 minutes
+- Applies globally to all routes
+- Exceeding limit returns:
+```
+{
+  "error": {
+    "code": "RATE_LIMIT_EXCEEDED",
+    "message": "Too many requests. Please try again later."
+  }
+}
+```
+
+### Data Expiry
+- Generated mocks expire automatically after 6 hours.
+- Expired mocks return 404 on access.
+
 ### Notes
 - Each top-level key becomes a REST resource
 - CRUD routes are auto-generated

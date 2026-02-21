@@ -1,6 +1,7 @@
 # 🏗 Architecture
 
-**jsonToApi is built for speed and ephemerality. No heavy databases, no persistent bottlenecks.**
+**jsonToApi is designed to create temporary mock endpoints with controlled persistence and automatic cleanup.
+It uses MongoDB with TTL-based expiration instead of in-memory storage, ensuring stability across server restarts.**
 
 ---
 
@@ -9,31 +10,54 @@
 
 
 ```text
-  [ Client ]  ──( POST JSON )──▶  [ Node.js Server ]  ──▶  [ In-Memory / Redis ]
-      ▲                                 │                          │
-      │                                 │                          │
-      └───────( GET Mock URL )──────────┴◀──────( Fetch Data )─────┘
+  [ Client ]  ──( POST JSON )──▶  [ Node.js Server ]  ──▶  [ MongoDB ]
+      ▲                                 │                         │
+      │                                 │                         │
+      └───────( GET Mock URL )──────────┴◀──────( Fetch Data )────┘
 ```
+Flow:
+- Client sends JSON via POST /generate
+- Server validates and stores JSON in MongoDB
+- MongoDB assigns TTL expiry
+- Client receives generated mock URL
+- Hitting that URL fetches stored JSON
 ---
 
 ### ⚙️ Core Components
-1. **Temporary Storage** Data is held in an LRU (Least Recently Used) cache or Redis. We don't use a traditional DB because your mocks aren't meant to live forever.
+1. **Persistent Temporary Storage**
+- Mocks are stored in MongoDB with a TTL index (e.g., 6 hours).
+- This means:
+  - Data survives server restarts
+  - Automatic cleanup handled by MongoDB
+  - No manual background job needed
 
-2. **Unique ID Generation** Every POST request generates a high-entropy short ID or respects the custom path you provide in the URL.
+2. **Unique ID Generation**
+- Every POST request generates a high-entropy short ID.
+- The ID becomes part of the mock URL:
+  ```
+  http://localhost:3000/:id
+  ```
 
-3. **Dynamic Routing** The server uses a "catch-all" handler. It doesn't look for pre-defined routes; it queries the store for whatever path you just hit.
+4. **Dynamic Routing** A parameterized route handler (/:id) dynamically fetches mock data from MongoDB. No predefined routes required.
 
-4. **Expiry Cleanup** A background TTL (Time-To-Live) logic automatically nukes entries after 24 hours to keep the memory footprint lean.
+5. **Expiry Cleanup** A background TTL (Time-To-Live) logic automatically nukes entries after 6 hours to keep the memory footprint lean.
 
    ---
 
 ### ⚡️ Technical Stack
-1. **Runtime**: Node.js (High concurrency)
+1. **Runtime**: Node.js (Express)
 
-2. **Store**: Redis (For atomic expiration)
+2. **Database**: MongoDB Atlas (TTL enabled)
 
-3. **Delivery**: Global Edge Caching (Optional/Planned)
+3. **Rate Limiting**: express-rate-limit
+
+4. **Validation**: Request validation layer (custom middleware)
 
    ---
 
-**Note**: Since the store is ephemeral, a server restart (in memory-mode) will clear active mocks. Use the Redis provider for more stability during development.
+### Important Note
+- Mocks are temporary.
+- After TTL expiry:
+  - The document is deleted
+  - The mock URL becomes invalid
+- If MongoDB is unavailable, mock generation will fail (no fallback memory store).

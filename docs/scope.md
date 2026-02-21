@@ -7,7 +7,7 @@
 
 4. That URL returns JSON via REST endpoints
 
-5. Expiry (24h)
+5. Expiry (6h)
 
 6. Copy curl/snippet
 
