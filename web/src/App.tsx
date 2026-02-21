@@ -9,9 +9,10 @@ import EndpointTester from './components/EndpointTester';
 function App() {
   const [jsonInput, setJsonInput] = useState('');
   const [generatedLink, setGeneratedLink] = useState('');
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
   const generateLink = async() => {
     // api call
-    const response:any = await fetch('http://localhost:3000/generate', {
+    const response:any = await fetch(`${API_BASE_URL}/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

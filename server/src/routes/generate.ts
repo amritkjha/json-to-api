@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { saveMock } from "../services/store.js";
 import { AppError } from "../utils/appError.js";
+import { nanoid } from "nanoid";
 
 const router = Router();
 
@@ -39,7 +40,7 @@ router.post('/generate', async(req,res) => {
             "JSON exceeds allowed size"
         );
     }
-    const id = Math.random().toString(36).substring(2, 8);
+    const id = nanoid(10);
     await saveMock(id, data);
     res.status(200).json({
         id,
