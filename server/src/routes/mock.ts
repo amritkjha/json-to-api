@@ -4,9 +4,9 @@ import { AppError } from "../utils/appError.js";
 
 const router = Router();
 
-router.get('/:id/', (req,res) => {
+router.get('/:id/', async(req,res) => {
     const { id } = req.params;  // to be used to extract data
-    const data = getMock(id);
+    const data = await getMock(id);
     if(!data) {
         // res.status(404).json({error: 'No such API found.'});
         throw new AppError(
@@ -15,11 +15,11 @@ router.get('/:id/', (req,res) => {
             `Mock API with id: ${id} not found.`
         )
     }
-    res.status(200).json(data.data);
+    res.status(200).json(data.payload);
 })
-router.delete('/:id/', (req,res) => {
+router.delete('/:id/', async(req,res) => {
     const { id } = req.params;
-    const deleted = deleteMock(id);
+    const deleted = await deleteMock(id);
     if(!deleted) {
         // return res.status(404).json({error: 'No such API found'});
         throw new AppError(

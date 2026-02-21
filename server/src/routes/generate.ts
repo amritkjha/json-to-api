@@ -4,7 +4,7 @@ import { AppError } from "../utils/appError.js";
 
 const router = Router();
 
-router.post('/generate', (req,res) => {
+router.post('/generate', async(req,res) => {
     const data = req.body;  // to be stored
     if(!data || typeof data !== 'object' || Array.isArray(data)) {
         // res.status(400).json({error: 'Invalid Json'});
@@ -30,8 +30,17 @@ router.post('/generate', (req,res) => {
             );
         }
     }
+    const size = Buffer.byteLength(JSON.stringify(data), "utf8");
+
+    if (size > 100000) {
+        throw new AppError(
+            400,
+            "PAYLOAD_TOO_LARGE",
+            "JSON exceeds allowed size"
+        );
+    }
     const id = Math.random().toString(36).substring(2, 8);
-    saveMock(id, data);
+    await saveMock(id, data);
     res.status(200).json({
         id,
         urll: `http://localhost:3000/${id}`,
