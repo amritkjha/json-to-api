@@ -41,10 +41,11 @@ router.post('/generate', async(req,res) => {
         );
     }
     const id = nanoid(10);
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
     await saveMock(id, data);
     res.status(200).json({
         id,
-        urll: `http://localhost:3000/${id}`,
+        urll: `${baseUrl}/${id}`,
     })
 })
 
