@@ -17,8 +17,9 @@ const EndpointTester = () => {
     const handleUrlInput = (e:any) => {
         try {
             const url = new URL(e.target.value);
+            const allowedHost = new URL(import.meta.env.VITE_API_BASE_URL).hostname;
             console.log('url: ', url);
-            if(url.hostname !== 'localhost')setError('only URLs from localhost allowed');
+            if(url.hostname !== allowedHost)setError('only URLs from localhost allowed');
             else setError('');
         } catch (error:any) {
             setError(error.message);
