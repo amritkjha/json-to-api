@@ -2,6 +2,8 @@
 
 **Generate mock APIs in 5 seconds.  
 No login. No setup. Just paste JSON.**
+<img width="1090" height="761" alt="Screenshot 2026-02-22 at 7 01 58 PM" src="https://github.com/user-attachments/assets/88645bc0-ff43-4d9c-b4dd-41566aa7bf85" />
+
 
 ---
 
@@ -22,11 +24,12 @@ No login. No setup. Just paste JSON.**
 1. Open the website  
 2. Paste your JSON  
 3. Click **Generate**  
-4. Get a live API link instantly  
+4. Get a live API link instantly
+5. Test it in the End point tester
 
 Done.
 
 ---
 
 ### 🧪 Try it out
-> 🌐 **Live URL:** (Under Development)
+> 🌐 **Live URL:** https://json-to-api-beta.vercel.app/
